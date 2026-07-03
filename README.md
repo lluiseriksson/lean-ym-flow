@@ -52,6 +52,7 @@ creation time:
 - `MATHLIB_AUDIT.md`: audit of what Mathlib already provides.
 - `HYPOTHESIS_FRONTIER.md`: exact list of explicit hypotheses and proof debt.
 - `INTERFACES.md`: public signatures and breaking-change policy.
+- `MOTHER_INTERFACE_DIGEST.md`: exact import/API digest for mother-repo consumers.
 - `PARABOLIC_TOOLBOX.md`: shared analysis obligations and upstream targets.
 
 ## Build
