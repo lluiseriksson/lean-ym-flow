@@ -1,83 +1,64 @@
 # Hypothesis Frontier
 
-Date: 2026-07-03
+Date: 2026-07-03 (second iteration)
 
 ## Current proof status
 
-- `sorry`: none in `main`.
-- Project `axiom`: none.
+- `sorry`: none in `main`. Project `axiom`: none.
 - Unproved mathematics: carried only through explicit hypothesis records in
-  `YMFlow/Interfaces.lean`.
+  `YMFlow/Interfaces.lean`, PLUS the closed facts below.
 
-## Explicit hypothesis records
+## Closed facts on `main` (new this iteration)
 
-### `CompactGradientFlowHypotheses`
+Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
 
-M0 compact finite-dimensional gradient flow.
+- `WeightedGraph`, `degree`, `heatStep`, the `CFL` condition.
+- `heatStep_le_of_le` / `le_heatStep_of_le`: **discrete maximum and minimum
+  principles** under CFL; `abs_heatStep_le` (sup-norm stability).
+- `sum_heatStep`: **exact mass conservation** for symmetric weights (vertex-
+  swap antisymmetry).
+- `iterate_heatStep_le_of_le`, `sum_iterate_heatStep`: both persist under
+  iteration of the scheme.
 
-- `local_exists_unique : P.localExistsUnique`
-- `energy_nonincreasing : forall x s t, P.timeLe P.zeroTime s -> P.timeLe s t -> ...`
-- `global_exists : forall x t, P.timeLe P.zeroTime t -> Nonempty P.State`
+Linear model (`LinearModel.lean`) — M0 discharged:
 
-Distance to target: the interface has not yet connected `P.flow` to a
-manifold vector field, the negative gradient of `P.energy`, or Mathlib's
-Picard-Lindelof/Gronwall API.  The compact-extension argument is not yet
-formalized.  `Time`, `Energy`, and their orders are abstract pending the first
-Mathlib-backed proof.
+- `linearIntervalProblem`: the linear flow `x ↦ e^{-t} x` on the compact
+  interval `{|x| ≤ 1}`, packaged as a `CompactGradientFlowProblem` whose
+  `localExistsUnique` field carries the honest flow laws (initial condition
+  + semigroup) and whose `stateCompact` field carries interval compactness.
+- `linearInterval_hypotheses`: **first fully unconditional instance of
+  `CompactGradientFlowHypotheses`** — every field a theorem.
+- `linearIntervalProblem_stateCompact`: the carried compactness proposition
+  is proved.
+- `linearFlow_energy_decay`: exact exponential energy decay at rate 2 — the
+  model statement the M2 smoothing bounds discretize.
 
-### `LatticeFlowHypotheses`
+## Explicit hypothesis records (unchanged, still open for real models)
 
-M1 lattice Yang-Mills flow.
+`CompactGradientFlowHypotheses` for a general vector field (Picard-Lindelöf
+backing), `LatticeFlowHypotheses`, `LatticeSmoothingHypotheses`,
+`ContinuumStatements` packages, `ParabolicToolboxHypotheses`.
 
-- `gauge_equivariant`
-- `action_nonincreasing`
-- `subsequential_limit_critical`
+## Frontier obligations (branch `frontier/M0-M2`, statement-first, sorried)
 
-Distance to target: `Config = SU(2)^Edge` is not yet realized.  The Wilson
-action, its gradient, gauge action on edges, and compactness/subsequence
-topology are still abstract.  `vertexFinite`, `edgeFinite`, and
-`plaquetteFinite` are proposition fields, not Mathlib `Fintype` instances yet.
+`Frontier/MatrixFlow.lean`:
 
-### `LatticeSmoothingHypotheses`
+- `matrixFlow_energy_nonincreasing` (PSD matrix semigroup decreases the
+  quadratic energy; route: `Matrix.exp` + spectral theorem).
+- `linearFlow_unique_solution` (Picard-Lindelöf upgrade of the flow-law
+  `localExistsUnique` proved on `main`).
+- `heatStep_iterate_tendsto_semigroup` (the discrete scheme converges to
+  the graph-Laplacian semigroup: the M1 bridge).
+- `iterate_heatStep_oscillation_decay` (discrete Lüscher smoothing;
+  constants must become explicit before `ym-lattice-numerics` can certify
+  them).
 
-M2 smoothing.
+## Honest distance to the goal
 
-- `plaquette_bound`
-- `t0_scale_condition`
-
-Distance to target: no Luescher-type lattice gradient-flow estimate has been
-proved.  The `t0` interface is present only as an explicit predicate.
-
-### `ContinuousYangMillsHypotheses`
-
-M3 continuum statements-first.
-
-- `rade_global_dim_two_three`
-- `struwe_schlatter_dim_four_conditional`
-- `waldron_no_finite_time_blowup_dim_four`
-
-Distance to target: these are bibliographic wrappers only.  They do not
-formalize bundles, connections, curvature, Sobolev spaces on manifolds,
-Uhlenbeck compactness, epsilon-regularity, or bubbling analysis.
-
-### `ParabolicToolboxHypotheses`
-
-M4 shared parabolic toolbox.
-
-- `energy_inequality_available`
-- `energy_inequality_proof`
-- `gagliardo_nirenberg_available`
-- `gagliardo_nirenberg_proof`
-- `epsilon_regularization_available`
-- `epsilon_regularization_proof`
-
-Distance to target: Mathlib has general Sobolev and ODE ingredients, but the
-Yang-Mills-specific parabolic estimates are not yet formalized.
-
-## Honest distance to the programme objective
-
-This repository currently fixes import names and hypothesis boundaries.  It
-does not yet prove any substantive Yang-Mills flow theorem.  The first real
-proof objective is to replace the M0 `local_exists_unique` field with a theorem
-using Mathlib's ODE APIs, then prove energy monotonicity from an explicit
-finite-dimensional negative-gradient equation.
+M0 has one fully discharged instance (the linear interval flow), but the
+general compact-manifold version remains open — the instance shows the
+interface is sound, not that the analysis is done.  M1/M2 now have their
+discrete substrate (maximum principle + mass conservation, iterated) and
+their bridge statements; the SU(2) lattice realization is untouched.
+M3 statements and M4 toolbox remain as at T0.  Navier-Stokes is NOT a goal
+of this repository, as per MILESTONES.md.
