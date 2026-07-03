@@ -1,0 +1,11 @@
+/.lake/
+/lake-packages/
+*.olean
+*.ilean
+*.c
+*.o
+*.so
+*.dll
+*.dylib
+*.trace
+*.olean.hash
