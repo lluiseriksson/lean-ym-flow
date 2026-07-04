@@ -46,10 +46,12 @@ Main API:
 - `YMFlow.WeightedGraph.heatStep_le_of_le`
 - `YMFlow.WeightedGraph.le_heatStep_of_le`
 - `YMFlow.WeightedGraph.abs_heatStep_le`
+- `YMFlow.WeightedGraph.heatStep_const`
 - `YMFlow.WeightedGraph.sum_heatStep`
 - `YMFlow.WeightedGraph.iterate_heatStep_le_of_le`
 - `YMFlow.WeightedGraph.le_iterate_heatStep_of_le`
 - `YMFlow.WeightedGraph.abs_iterate_heatStep_le`
+- `YMFlow.WeightedGraph.iterate_heatStep_const`
 - `YMFlow.WeightedGraph.sum_iterate_heatStep`
 
 Input assumptions:
@@ -66,6 +68,8 @@ Consumer meaning:
 - `heatStep_le_of_le` and `le_heatStep_of_le` are the discrete maximum and
   minimum principles for explicit Euler heat flow under CFL.
 - `abs_heatStep_le` is the sup-norm stability form.
+- `heatStep_const` and `iterate_heatStep_const` say spatially constant states
+  are fixed by the scheme and all its iterates.
 - `iterate_heatStep_le_of_le`, `le_iterate_heatStep_of_le`, and
   `abs_iterate_heatStep_le` are the iterated maximum/minimum/sup-norm
   stability forms.

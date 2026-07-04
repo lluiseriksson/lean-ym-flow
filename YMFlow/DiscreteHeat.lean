@@ -100,6 +100,11 @@ theorem abs_heatStep_le {tau M : ℝ} (hcfl : G.CFL tau) {u : V -> ℝ}
   · exact G.le_heatStep_of_le hcfl (fun w => (abs_le.mp (hu w)).1) v
   · exact G.heatStep_le_of_le hcfl (fun w => (abs_le.mp (hu w)).2) v
 
+/-- Constant states are fixed points of one heat step. -/
+theorem heatStep_const (tau c : ℝ) (v : V) :
+    G.heatStep tau (fun _ : V => c) v = c := by
+  simp [heatStep]
+
 /-- **Mass conservation** for symmetric weights: the heat step preserves the
 total mass exactly.  Proof: the diffusion double sum is antisymmetric under
 the vertex swap. -/
@@ -160,6 +165,16 @@ theorem abs_iterate_heatStep_le {tau M : ℝ} (hcfl : G.CFL tau)
     intro v
     rw [Function.iterate_succ_apply']
     exact G.abs_heatStep_le hcfl ih v
+
+/-- Constant states remain fixed under every iterated heat step. -/
+theorem iterate_heatStep_const (tau c : ℝ) (n : ℕ) :
+    (G.heatStep tau)^[n] (fun _ : V => c) = fun _ => c := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    rw [Function.iterate_succ_apply', ih]
+    funext v
+    exact G.heatStep_const tau c v
 
 /-- Mass conservation persists under iteration of the scheme. -/
 theorem sum_iterate_heatStep (tau : ℝ) (u : V -> ℝ) (n : ℕ) :
