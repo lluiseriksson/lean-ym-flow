@@ -135,6 +135,32 @@ theorem iterate_heatStep_le_of_le {tau M : ℝ} (hcfl : G.CFL tau)
     rw [Function.iterate_succ_apply']
     exact G.heatStep_le_of_le hcfl ih v
 
+/-- The minimum principle persists under iteration of the scheme. -/
+theorem le_iterate_heatStep_of_le {tau m : ℝ} (hcfl : G.CFL tau)
+    {u : V -> ℝ} (hu : ∀ v, m ≤ u v) (n : ℕ) :
+    ∀ v, m ≤ (G.heatStep tau)^[n] u v := by
+  induction n with
+  | zero =>
+    intro v
+    simpa using hu v
+  | succ n ih =>
+    intro v
+    rw [Function.iterate_succ_apply']
+    exact G.le_heatStep_of_le hcfl ih v
+
+/-- Sup-norm stability persists under iteration of the scheme. -/
+theorem abs_iterate_heatStep_le {tau M : ℝ} (hcfl : G.CFL tau)
+    {u : V -> ℝ} (hu : ∀ v, |u v| ≤ M) (n : ℕ) :
+    ∀ v, |(G.heatStep tau)^[n] u v| ≤ M := by
+  induction n with
+  | zero =>
+    intro v
+    simpa using hu v
+  | succ n ih =>
+    intro v
+    rw [Function.iterate_succ_apply']
+    exact G.abs_heatStep_le hcfl ih v
+
 /-- Mass conservation persists under iteration of the scheme. -/
 theorem sum_iterate_heatStep (tau : ℝ) (u : V -> ℝ) (n : ℕ) :
     (∑ v, (G.heatStep tau)^[n] u v) = ∑ v, u v := by

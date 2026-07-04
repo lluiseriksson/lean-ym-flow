@@ -17,8 +17,10 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
   principles** under CFL; `abs_heatStep_le` (sup-norm stability).
 - `sum_heatStep`: **exact mass conservation** for symmetric weights (vertex-
   swap antisymmetry).
-- `iterate_heatStep_le_of_le`, `sum_iterate_heatStep`: both persist under
-  iteration of the scheme.
+- `iterate_heatStep_le_of_le`, `le_iterate_heatStep_of_le`,
+  `abs_iterate_heatStep_le`, `sum_iterate_heatStep`: maximum, minimum,
+  sup-norm stability, and mass conservation persist under iteration of the
+  scheme.
 
 Linear model (`LinearModel.lean`) — M0 discharged:
 
