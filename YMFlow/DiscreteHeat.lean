@@ -105,6 +105,16 @@ theorem heatStep_const (tau c : ℝ) (v : V) :
     G.heatStep tau (fun _ : V => c) v = c := by
   simp [heatStep]
 
+/-- Adding a spatial constant commutes with one heat step. -/
+theorem heatStep_add_const (tau c : ℝ) (u : V -> ℝ) :
+    G.heatStep tau (fun v => u v + c) = fun v => G.heatStep tau u v + c := by
+  funext v
+  simp only [heatStep]
+  rw [show (∑ x, G.weight v x * ((u x + c) - (u v + c)))
+      = ∑ x, G.weight v x * (u x - u v) by
+    exact Finset.sum_congr rfl fun x _ => by ring]
+  ring
+
 /-- **Mass conservation** for symmetric weights: the heat step preserves the
 total mass exactly.  Proof: the diffusion double sum is antisymmetric under
 the vertex swap. -/
@@ -175,6 +185,16 @@ theorem iterate_heatStep_const (tau c : ℝ) (n : ℕ) :
     rw [Function.iterate_succ_apply', ih]
     funext v
     exact G.heatStep_const tau c v
+
+/-- Adding a spatial constant commutes with every iterated heat step. -/
+theorem iterate_heatStep_add_const (tau c : ℝ) (u : V -> ℝ) (n : ℕ) :
+    (G.heatStep tau)^[n] (fun v => u v + c)
+      = fun v => (G.heatStep tau)^[n] u v + c := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    rw [Function.iterate_succ_apply', Function.iterate_succ_apply', ih,
+      G.heatStep_add_const]
 
 /-- Mass conservation persists under iteration of the scheme. -/
 theorem sum_iterate_heatStep (tau : ℝ) (u : V -> ℝ) (n : ℕ) :
