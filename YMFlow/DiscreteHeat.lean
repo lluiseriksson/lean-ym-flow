@@ -100,6 +100,15 @@ theorem abs_heatStep_le {tau M : ℝ} (hcfl : G.CFL tau) {u : V -> ℝ}
   · exact G.le_heatStep_of_le hcfl (fun w => (abs_le.mp (hu w)).1) v
   · exact G.heatStep_le_of_le hcfl (fun w => (abs_le.mp (hu w)).2) v
 
+/-- Interval invariance: if the initial datum stays in `[m, M]`, then one
+heat step stays in `[m, M]`. -/
+theorem heatStep_mem_Icc {tau m M : ℝ} (hcfl : G.CFL tau) {u : V -> ℝ}
+    (hu : ∀ v, m ≤ u v ∧ u v ≤ M) (v : V) :
+    m ≤ G.heatStep tau u v ∧ G.heatStep tau u v ≤ M := by
+  constructor
+  · exact G.le_heatStep_of_le hcfl (fun w => (hu w).1) v
+  · exact G.heatStep_le_of_le hcfl (fun w => (hu w).2) v
+
 /-- Constant states are fixed points of one heat step. -/
 theorem heatStep_const (tau c : ℝ) (v : V) :
     G.heatStep tau (fun _ : V => c) v = c := by
@@ -175,6 +184,15 @@ theorem abs_iterate_heatStep_le {tau M : ℝ} (hcfl : G.CFL tau)
     intro v
     rw [Function.iterate_succ_apply']
     exact G.abs_heatStep_le hcfl ih v
+
+/-- Interval invariance persists under iteration of the scheme. -/
+theorem iterate_heatStep_mem_Icc {tau m M : ℝ} (hcfl : G.CFL tau)
+    {u : V -> ℝ} (hu : ∀ v, m ≤ u v ∧ u v ≤ M) (n : ℕ) :
+    ∀ v, m ≤ (G.heatStep tau)^[n] u v ∧ (G.heatStep tau)^[n] u v ≤ M := by
+  intro v
+  constructor
+  · exact G.le_iterate_heatStep_of_le hcfl (fun w => (hu w).1) n v
+  · exact G.iterate_heatStep_le_of_le hcfl (fun w => (hu w).2) n v
 
 /-- Constant states remain fixed under every iterated heat step. -/
 theorem iterate_heatStep_const (tau c : ℝ) (n : ℕ) :

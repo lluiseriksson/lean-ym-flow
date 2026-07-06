@@ -1,6 +1,6 @@
 # Hypothesis Frontier
 
-Date: 2026-07-04 (constant-state oracle)
+Date: 2026-07-06 (interval-invariance oracle)
 
 ## Current proof status
 
@@ -15,14 +15,16 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
 - `WeightedGraph`, `degree`, `heatStep`, the `CFL` condition.
 - `heatStep_le_of_le` / `le_heatStep_of_le`: **discrete maximum and minimum
   principles** under CFL; `abs_heatStep_le` (sup-norm stability).
+- `heatStep_mem_Icc`: one-step closed interval invariance under CFL.
 - `heatStep_const`: spatially constant states are fixed by one heat step.
 - `heatStep_add_const`: adding a spatial constant commutes with one heat step.
 - `sum_heatStep`: **exact mass conservation** for symmetric weights (vertex-
   swap antisymmetry).
 - `iterate_heatStep_le_of_le`, `le_iterate_heatStep_of_le`,
-  `abs_iterate_heatStep_le`, `iterate_heatStep_const`,
-  `iterate_heatStep_add_const`, `sum_iterate_heatStep`: maximum, minimum,
-  sup-norm stability, constant states, additive-constant covariance, and mass
+  `abs_iterate_heatStep_le`, `iterate_heatStep_mem_Icc`,
+  `iterate_heatStep_const`, `iterate_heatStep_add_const`,
+  `sum_iterate_heatStep`: maximum, minimum, sup-norm stability, interval
+  invariance, constant states, additive-constant covariance, and mass
   conservation persist under iteration of the scheme.
 
 Linear model (`LinearModel.lean`) — M0 discharged:
