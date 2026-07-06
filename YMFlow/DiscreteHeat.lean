@@ -235,6 +235,11 @@ theorem iterate_heatStep_add_const (tau c : ℝ) (u : V -> ℝ) (n : ℕ) :
     rw [Function.iterate_succ_apply', Function.iterate_succ_apply', ih,
       G.heatStep_add_const]
 
+/-- Zero iterations of the heat scheme are the identity map for any time step. -/
+theorem iterate_heatStep_zero_steps (tau : ℝ) (u : V -> ℝ) :
+    (G.heatStep tau)^[0] u = u := by
+  rfl
+
 /-- With zero time step, every iterated heat scheme is the identity map. -/
 theorem iterate_heatStep_zero_tau (u : V -> ℝ) (n : ℕ) :
     (G.heatStep 0)^[n] u = u := by

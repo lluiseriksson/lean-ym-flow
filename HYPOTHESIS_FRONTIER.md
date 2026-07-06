@@ -25,10 +25,11 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
 - `iterate_heatStep_le_of_le`, `le_iterate_heatStep_of_le`,
   `abs_iterate_heatStep_le`, `iterate_heatStep_mem_Icc`,
   `iterate_heatStep_const`, `iterate_heatStep_add_const`,
+  `iterate_heatStep_zero_steps`,
   `iterate_heatStep_zero_tau`, `sum_iterate_heatStep`: maximum, minimum,
   sup-norm stability, interval invariance, constant states, additive-constant
-  covariance, zero-time identity, and mass conservation persist under
-  iteration of the scheme.
+  covariance, zero-step identity, zero-time identity, and mass conservation
+  persist under iteration of the scheme.
 
 `CFL_of_nonneg_le` is the current substepping oracle: if `tau` satisfies CFL,
 then every `sigma` with `0 ≤ sigma ≤ tau` also satisfies CFL.
