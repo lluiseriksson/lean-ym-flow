@@ -55,6 +55,7 @@ Main API:
 - `YMFlow.WeightedGraph.heatStep_add_const`
 - `YMFlow.WeightedGraph.heatStep_add`
 - `YMFlow.WeightedGraph.heatStep_smul`
+- `YMFlow.WeightedGraph.heatStep_sub`
 - `YMFlow.WeightedGraph.heatStep_sub_const`
 - `YMFlow.WeightedGraph.sum_heatStep`
 - `YMFlow.WeightedGraph.iterate_heatStep_le_of_le`
@@ -66,6 +67,7 @@ Main API:
 - `YMFlow.WeightedGraph.iterate_heatStep_add_const`
 - `YMFlow.WeightedGraph.iterate_heatStep_add`
 - `YMFlow.WeightedGraph.iterate_heatStep_smul`
+- `YMFlow.WeightedGraph.iterate_heatStep_sub`
 - `YMFlow.WeightedGraph.iterate_heatStep_sub_const`
 - `YMFlow.WeightedGraph.iterate_heatStep_zero_steps`
 - `YMFlow.WeightedGraph.iterate_heatStep_zero_tau`
@@ -104,6 +106,9 @@ Consumer meaning:
 - `heatStep_smul` and `iterate_heatStep_smul` say scalar multiplication
   commutes with the scheme and all iterates; this is a small normalization
   oracle for later discrete estimates.
+- `heatStep_sub` and `iterate_heatStep_sub` say pointwise differences commute
+  with the scheme and all iterates; this is a small perturbation oracle for
+  later stability estimates.
 - `heatStep_sub_const` and `iterate_heatStep_sub_const` say subtracting a
   spatial constant commutes with the scheme and all iterates; this is a small
   centering oracle for later oscillation estimates.
