@@ -58,6 +58,14 @@ theorem CFL_zero : G.CFL 0 := by
   · intro v
     simp
 
+/-- Any nonnegative smaller time step preserves the CFL condition. -/
+theorem CFL_of_nonneg_le {sigma tau : ℝ} (hsigma : 0 ≤ sigma) (hle : sigma ≤ tau)
+    (hcfl : G.CFL tau) : G.CFL sigma := by
+  constructor
+  · exact hsigma
+  · intro v
+    exact (mul_le_mul_of_nonneg_right hle (G.degree_nonneg v)).trans (hcfl.2 v)
+
 /-- Splitting the diffusion term into neighbour mass and degree drain. -/
 theorem heatStep_split (tau : ℝ) (u : V -> ℝ) (v : V) :
     G.heatStep tau u v

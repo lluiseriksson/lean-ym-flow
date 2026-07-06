@@ -1,6 +1,6 @@
 # Hypothesis Frontier
 
-Date: 2026-07-06 (zero-tau oracle)
+Date: 2026-07-06 (CFL substepping oracle)
 
 ## Current proof status
 
@@ -12,7 +12,8 @@ Date: 2026-07-06 (zero-tau oracle)
 
 Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
 
-- `WeightedGraph`, `degree`, `heatStep`, the `CFL` condition, and `CFL_zero`.
+- `WeightedGraph`, `degree`, `heatStep`, the `CFL` condition, `CFL_zero`, and
+  `CFL_of_nonneg_le`.
 - `heatStep_le_of_le` / `le_heatStep_of_le`: **discrete maximum and minimum
   principles** under CFL; `abs_heatStep_le` (sup-norm stability).
 - `heatStep_zero_tau`: the zero-time heat step is exactly the identity map.
@@ -28,6 +29,9 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
   sup-norm stability, interval invariance, constant states, additive-constant
   covariance, zero-time identity, and mass conservation persist under
   iteration of the scheme.
+
+`CFL_of_nonneg_le` is the current substepping oracle: if `tau` satisfies CFL,
+then every `sigma` with `0 ≤ sigma ≤ tau` also satisfies CFL.
 
 Linear model (`LinearModel.lean`) — M0 discharged:
 
