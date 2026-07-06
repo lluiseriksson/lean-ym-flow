@@ -42,7 +42,9 @@ Main API:
 - `YMFlow.WeightedGraph.degree_nonneg`
 - `YMFlow.WeightedGraph.heatStep`
 - `YMFlow.WeightedGraph.CFL`
+- `YMFlow.WeightedGraph.CFL_zero`
 - `YMFlow.WeightedGraph.heatStep_split`
+- `YMFlow.WeightedGraph.heatStep_zero_tau`
 - `YMFlow.WeightedGraph.heatStep_le_of_le`
 - `YMFlow.WeightedGraph.le_heatStep_of_le`
 - `YMFlow.WeightedGraph.abs_heatStep_le`
@@ -56,6 +58,7 @@ Main API:
 - `YMFlow.WeightedGraph.iterate_heatStep_mem_Icc`
 - `YMFlow.WeightedGraph.iterate_heatStep_const`
 - `YMFlow.WeightedGraph.iterate_heatStep_add_const`
+- `YMFlow.WeightedGraph.iterate_heatStep_zero_tau`
 - `YMFlow.WeightedGraph.sum_iterate_heatStep`
 
 Input assumptions:
@@ -74,6 +77,9 @@ Consumer meaning:
 - `abs_heatStep_le` is the sup-norm stability form.
 - `heatStep_mem_Icc` packages one-step closed interval invariance from the
   upper and lower comparison principles.
+- `CFL_zero`, `heatStep_zero_tau`, and `iterate_heatStep_zero_tau` give the
+  zero-time oracle: tau `0` satisfies CFL and every zero-time heat iterate is
+  the identity map.
 - `heatStep_const` and `iterate_heatStep_const` say spatially constant states
   are fixed by the scheme and all its iterates.
 - `heatStep_add_const` and `iterate_heatStep_add_const` say adding a spatial

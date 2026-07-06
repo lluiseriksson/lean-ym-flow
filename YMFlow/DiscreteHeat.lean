@@ -51,6 +51,13 @@ noncomputable def heatStep (tau : ℝ) (u : V -> ℝ) : V -> ℝ :=
 def CFL (tau : ℝ) : Prop :=
   0 ≤ tau ∧ ∀ v, tau * G.degree v ≤ 1
 
+/-- Zero time step always satisfies the CFL condition. -/
+theorem CFL_zero : G.CFL 0 := by
+  constructor
+  · norm_num
+  · intro v
+    simp
+
 /-- Splitting the diffusion term into neighbour mass and degree drain. -/
 theorem heatStep_split (tau : ℝ) (u : V -> ℝ) (v : V) :
     G.heatStep tau u v
@@ -60,6 +67,12 @@ theorem heatStep_split (tau : ℝ) (u : V -> ℝ) (v : V) :
   congr 1
   rw [degree, Finset.sum_mul, ← Finset.sum_sub_distrib]
   exact Finset.sum_congr rfl fun x _ => by ring
+
+/-- With zero time step, the heat scheme is the identity map. -/
+theorem heatStep_zero_tau (u : V -> ℝ) :
+    G.heatStep 0 u = u := by
+  funext v
+  simp [heatStep]
 
 /-- **Discrete maximum principle.**  Under CFL, one heat step cannot exceed
 any pointwise upper bound of the initial datum. -/
@@ -213,6 +226,14 @@ theorem iterate_heatStep_add_const (tau c : ℝ) (u : V -> ℝ) (n : ℕ) :
   | succ n ih =>
     rw [Function.iterate_succ_apply', Function.iterate_succ_apply', ih,
       G.heatStep_add_const]
+
+/-- With zero time step, every iterated heat scheme is the identity map. -/
+theorem iterate_heatStep_zero_tau (u : V -> ℝ) (n : ℕ) :
+    (G.heatStep 0)^[n] u = u := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    rw [Function.iterate_succ_apply', ih, G.heatStep_zero_tau]
 
 /-- Mass conservation persists under iteration of the scheme. -/
 theorem sum_iterate_heatStep (tau : ℝ) (u : V -> ℝ) (n : ℕ) :
