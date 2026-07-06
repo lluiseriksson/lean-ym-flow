@@ -162,6 +162,11 @@ theorem heatStep_smul (tau a : ℝ) (u : V -> ℝ) :
     exact Finset.sum_congr rfl fun x _ => by ring]
   ring
 
+/-- Subtracting a spatial constant commutes with one heat step. -/
+theorem heatStep_sub_const (tau c : ℝ) (u : V -> ℝ) :
+    G.heatStep tau (fun v => u v - c) = fun v => G.heatStep tau u v - c := by
+  simpa [sub_eq_add_neg] using G.heatStep_add_const tau (-c) u
+
 /-- **Mass conservation** for symmetric weights: the heat step preserves the
 total mass exactly.  Proof: the diffusion double sum is antisymmetric under
 the vertex swap. -/
@@ -267,6 +272,12 @@ theorem iterate_heatStep_smul (tau a : ℝ) (u : V -> ℝ) (n : ℕ) :
   | succ n ih =>
     rw [Function.iterate_succ_apply', Function.iterate_succ_apply', ih,
       G.heatStep_smul]
+
+/-- Subtracting a spatial constant commutes with every iterated heat step. -/
+theorem iterate_heatStep_sub_const (tau c : ℝ) (u : V -> ℝ) (n : ℕ) :
+    (G.heatStep tau)^[n] (fun v => u v - c)
+      = fun v => (G.heatStep tau)^[n] u v - c := by
+  simpa [sub_eq_add_neg] using G.iterate_heatStep_add_const tau (-c) u n
 
 /-- Zero iterations of the heat scheme are the identity map for any time step. -/
 theorem iterate_heatStep_zero_steps (tau : ℝ) (u : V -> ℝ) :
