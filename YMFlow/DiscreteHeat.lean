@@ -151,6 +151,19 @@ theorem heatStep_add_const (tau c : ℝ) (u : V -> ℝ) :
     exact Finset.sum_congr rfl fun x _ => by ring]
   ring
 
+/-- Additivity of one heat step. -/
+theorem heatStep_add (tau : ℝ) (u w : V -> ℝ) :
+    G.heatStep tau (fun v => u v + w v)
+      = fun v => G.heatStep tau u v + G.heatStep tau w v := by
+  funext v
+  simp only [heatStep]
+  rw [show (∑ x, G.weight v x * ((u x + w x) - (u v + w v)))
+      = (∑ x, G.weight v x * (u x - u v))
+        + ∑ x, G.weight v x * (w x - w v) by
+    rw [← Finset.sum_add_distrib]
+    exact Finset.sum_congr rfl fun x _ => by ring]
+  ring
+
 /-- Scalar multiplication commutes with one heat step. -/
 theorem heatStep_smul (tau a : ℝ) (u : V -> ℝ) :
     G.heatStep tau (fun v => a * u v) = fun v => a * G.heatStep tau u v := by
@@ -262,6 +275,16 @@ theorem iterate_heatStep_add_const (tau c : ℝ) (u : V -> ℝ) (n : ℕ) :
   | succ n ih =>
     rw [Function.iterate_succ_apply', Function.iterate_succ_apply', ih,
       G.heatStep_add_const]
+
+/-- Additivity persists under every iterated heat step. -/
+theorem iterate_heatStep_add (tau : ℝ) (u w : V -> ℝ) (n : ℕ) :
+    (G.heatStep tau)^[n] (fun v => u v + w v)
+      = fun v => (G.heatStep tau)^[n] u v + (G.heatStep tau)^[n] w v := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    rw [Function.iterate_succ_apply', Function.iterate_succ_apply',
+      Function.iterate_succ_apply', ih, G.heatStep_add]
 
 /-- Scalar multiplication commutes with every iterated heat step. -/
 theorem iterate_heatStep_smul (tau a : ℝ) (u : V -> ℝ) (n : ℕ) :
