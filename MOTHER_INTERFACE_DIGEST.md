@@ -43,6 +43,7 @@ Main API:
 - `YMFlow.WeightedGraph.heatStep`
 - `YMFlow.WeightedGraph.CFL`
 - `YMFlow.WeightedGraph.CFL_zero`
+- `YMFlow.WeightedGraph.CFL_of_nonneg_le`
 - `YMFlow.WeightedGraph.heatStep_split`
 - `YMFlow.WeightedGraph.heatStep_zero_tau`
 - `YMFlow.WeightedGraph.heatStep_le_of_le`
@@ -72,6 +73,8 @@ Input assumptions:
 
 Consumer meaning:
 
+- `CFL_of_nonneg_le` is the substepping oracle: once a time step is CFL,
+  every nonnegative smaller step is also CFL.
 - `heatStep_le_of_le` and `le_heatStep_of_le` are the discrete maximum and
   minimum principles for explicit Euler heat flow under CFL.
 - `abs_heatStep_le` is the sup-norm stability form.
