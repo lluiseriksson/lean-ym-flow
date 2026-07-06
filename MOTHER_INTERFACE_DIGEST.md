@@ -53,6 +53,7 @@ Main API:
 - `YMFlow.WeightedGraph.heatStep_mem_Icc`
 - `YMFlow.WeightedGraph.heatStep_const`
 - `YMFlow.WeightedGraph.heatStep_add_const`
+- `YMFlow.WeightedGraph.heatStep_smul`
 - `YMFlow.WeightedGraph.sum_heatStep`
 - `YMFlow.WeightedGraph.iterate_heatStep_le_of_le`
 - `YMFlow.WeightedGraph.le_iterate_heatStep_of_le`
@@ -61,6 +62,7 @@ Main API:
 - `YMFlow.WeightedGraph.iterate_heatStep_mem_Icc`
 - `YMFlow.WeightedGraph.iterate_heatStep_const`
 - `YMFlow.WeightedGraph.iterate_heatStep_add_const`
+- `YMFlow.WeightedGraph.iterate_heatStep_smul`
 - `YMFlow.WeightedGraph.iterate_heatStep_zero_steps`
 - `YMFlow.WeightedGraph.iterate_heatStep_zero_tau`
 - `YMFlow.WeightedGraph.sum_iterate_heatStep`
@@ -92,6 +94,9 @@ Consumer meaning:
 - `heatStep_add_const` and `iterate_heatStep_add_const` say adding a spatial
   constant commutes with the scheme and all iterates; this is a small oracle
   for later oscillation estimates.
+- `heatStep_smul` and `iterate_heatStep_smul` say scalar multiplication
+  commutes with the scheme and all iterates; this is a small normalization
+  oracle for later discrete estimates.
 - `iterate_heatStep_zero_steps` gives the zero-step oracle: for any time step,
   zero scheme iterations are exactly the identity map.
 - `iterate_heatStep_le_of_le`, `le_iterate_heatStep_of_le`, and
