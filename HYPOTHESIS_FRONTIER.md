@@ -1,6 +1,6 @@
 # Hypothesis Frontier
 
-Date: 2026-07-06 (interval-invariance oracle)
+Date: 2026-07-06 (zero-tau oracle)
 
 ## Current proof status
 
@@ -12,9 +12,10 @@ Date: 2026-07-06 (interval-invariance oracle)
 
 Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
 
-- `WeightedGraph`, `degree`, `heatStep`, the `CFL` condition.
+- `WeightedGraph`, `degree`, `heatStep`, the `CFL` condition, and `CFL_zero`.
 - `heatStep_le_of_le` / `le_heatStep_of_le`: **discrete maximum and minimum
   principles** under CFL; `abs_heatStep_le` (sup-norm stability).
+- `heatStep_zero_tau`: the zero-time heat step is exactly the identity map.
 - `heatStep_mem_Icc`: one-step closed interval invariance under CFL.
 - `heatStep_const`: spatially constant states are fixed by one heat step.
 - `heatStep_add_const`: adding a spatial constant commutes with one heat step.
@@ -23,9 +24,10 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
 - `iterate_heatStep_le_of_le`, `le_iterate_heatStep_of_le`,
   `abs_iterate_heatStep_le`, `iterate_heatStep_mem_Icc`,
   `iterate_heatStep_const`, `iterate_heatStep_add_const`,
-  `sum_iterate_heatStep`: maximum, minimum, sup-norm stability, interval
-  invariance, constant states, additive-constant covariance, and mass
-  conservation persist under iteration of the scheme.
+  `iterate_heatStep_zero_tau`, `sum_iterate_heatStep`: maximum, minimum,
+  sup-norm stability, interval invariance, constant states, additive-constant
+  covariance, zero-time identity, and mass conservation persist under
+  iteration of the scheme.
 
 Linear model (`LinearModel.lean`) — M0 discharged:
 
