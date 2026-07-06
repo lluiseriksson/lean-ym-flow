@@ -112,6 +112,12 @@ theorem le_heatStep_of_le {tau m : ℝ} (hcfl : G.CFL tau) {u : V -> ℝ}
   nlinarith [mul_nonneg (sub_nonneg.mpr (hdeg v)) (sub_nonneg.mpr (hu v)),
     mul_le_mul_of_nonneg_left hA htau, hu v]
 
+/-- Nonnegative data stays nonnegative after one heat step under CFL. -/
+theorem heatStep_nonneg {tau : ℝ} (hcfl : G.CFL tau) {u : V -> ℝ}
+    (hu : ∀ v, 0 ≤ u v) (v : V) :
+    0 ≤ G.heatStep tau u v := by
+  exact G.le_heatStep_of_le (m := 0) hcfl hu v
+
 /-- Sup-norm stability: the heat step preserves uniform bounds. -/
 theorem abs_heatStep_le {tau M : ℝ} (hcfl : G.CFL tau) {u : V -> ℝ}
     (hu : ∀ v, |u v| ≤ M) (v : V) :
@@ -192,6 +198,12 @@ theorem le_iterate_heatStep_of_le {tau m : ℝ} (hcfl : G.CFL tau)
     intro v
     rw [Function.iterate_succ_apply']
     exact G.le_heatStep_of_le hcfl ih v
+
+/-- Nonnegative data stays nonnegative under every iterated heat step. -/
+theorem iterate_heatStep_nonneg {tau : ℝ} (hcfl : G.CFL tau)
+    {u : V -> ℝ} (hu : ∀ v, 0 ≤ u v) (n : ℕ) :
+    ∀ v, 0 ≤ (G.heatStep tau)^[n] u v := by
+  exact G.le_iterate_heatStep_of_le (m := 0) hcfl hu n
 
 /-- Sup-norm stability persists under iteration of the scheme. -/
 theorem abs_iterate_heatStep_le {tau M : ℝ} (hcfl : G.CFL tau)

@@ -1,6 +1,6 @@
 # Hypothesis Frontier
 
-Date: 2026-07-06 (CFL substepping oracle)
+Date: 2026-07-06 (nonnegative heat oracle)
 
 ## Current proof status
 
@@ -16,6 +16,8 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
   `CFL_of_nonneg_le`.
 - `heatStep_le_of_le` / `le_heatStep_of_le`: **discrete maximum and minimum
   principles** under CFL; `abs_heatStep_le` (sup-norm stability).
+- `heatStep_nonneg`: nonnegative data remains nonnegative after one heat step
+  under CFL.
 - `heatStep_zero_tau`: the zero-time heat step is exactly the identity map.
 - `heatStep_mem_Icc`: one-step closed interval invariance under CFL.
 - `heatStep_const`: spatially constant states are fixed by one heat step.
@@ -23,13 +25,14 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
 - `sum_heatStep`: **exact mass conservation** for symmetric weights (vertex-
   swap antisymmetry).
 - `iterate_heatStep_le_of_le`, `le_iterate_heatStep_of_le`,
-  `abs_iterate_heatStep_le`, `iterate_heatStep_mem_Icc`,
-  `iterate_heatStep_const`, `iterate_heatStep_add_const`,
+  `iterate_heatStep_nonneg`, `abs_iterate_heatStep_le`,
+  `iterate_heatStep_mem_Icc`, `iterate_heatStep_const`,
+  `iterate_heatStep_add_const`,
   `iterate_heatStep_zero_steps`,
   `iterate_heatStep_zero_tau`, `sum_iterate_heatStep`: maximum, minimum,
-  sup-norm stability, interval invariance, constant states, additive-constant
-  covariance, zero-step identity, zero-time identity, and mass conservation
-  persist under iteration of the scheme.
+  nonnegativity, sup-norm stability, interval invariance, constant states,
+  additive-constant covariance, zero-step identity, zero-time identity, and
+  mass conservation persist under iteration of the scheme.
 
 `CFL_of_nonneg_le` is the current substepping oracle: if `tau` satisfies CFL,
 then every `sigma` with `0 ≤ sigma ≤ tau` also satisfies CFL.

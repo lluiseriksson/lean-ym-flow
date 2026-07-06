@@ -48,6 +48,7 @@ Main API:
 - `YMFlow.WeightedGraph.heatStep_zero_tau`
 - `YMFlow.WeightedGraph.heatStep_le_of_le`
 - `YMFlow.WeightedGraph.le_heatStep_of_le`
+- `YMFlow.WeightedGraph.heatStep_nonneg`
 - `YMFlow.WeightedGraph.abs_heatStep_le`
 - `YMFlow.WeightedGraph.heatStep_mem_Icc`
 - `YMFlow.WeightedGraph.heatStep_const`
@@ -55,6 +56,7 @@ Main API:
 - `YMFlow.WeightedGraph.sum_heatStep`
 - `YMFlow.WeightedGraph.iterate_heatStep_le_of_le`
 - `YMFlow.WeightedGraph.le_iterate_heatStep_of_le`
+- `YMFlow.WeightedGraph.iterate_heatStep_nonneg`
 - `YMFlow.WeightedGraph.abs_iterate_heatStep_le`
 - `YMFlow.WeightedGraph.iterate_heatStep_mem_Icc`
 - `YMFlow.WeightedGraph.iterate_heatStep_const`
@@ -78,6 +80,7 @@ Consumer meaning:
   every nonnegative smaller step is also CFL.
 - `heatStep_le_of_le` and `le_heatStep_of_le` are the discrete maximum and
   minimum principles for explicit Euler heat flow under CFL.
+- `heatStep_nonneg` is the one-step positivity-preservation oracle under CFL.
 - `abs_heatStep_le` is the sup-norm stability form.
 - `heatStep_mem_Icc` packages one-step closed interval invariance from the
   upper and lower comparison principles.
@@ -92,8 +95,9 @@ Consumer meaning:
 - `iterate_heatStep_zero_steps` gives the zero-step oracle: for any time step,
   zero scheme iterations are exactly the identity map.
 - `iterate_heatStep_le_of_le`, `le_iterate_heatStep_of_le`, and
-  `abs_iterate_heatStep_le` are the iterated maximum/minimum/sup-norm
-  stability forms.
+  `iterate_heatStep_nonneg` are the iterated maximum/minimum/nonnegativity
+  forms.
+- `abs_iterate_heatStep_le` is the iterated sup-norm stability form.
 - `iterate_heatStep_mem_Icc` packages interval invariance for any number of
   heat steps.
 - `sum_heatStep` and `sum_iterate_heatStep` are exact mass-conservation
