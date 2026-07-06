@@ -1,6 +1,6 @@
 # Mother Interface Digest
 
-Date: 2026-07-06
+Date: 2026-07-07
 
 This digest lists the current `main` artifacts that the mother repository may
 consume or monitor.  It is an integration map, not a new mathematical claim.
@@ -53,6 +53,7 @@ Main API:
 - `YMFlow.WeightedGraph.heatStep_mem_Icc`
 - `YMFlow.WeightedGraph.heatStep_const`
 - `YMFlow.WeightedGraph.heatStep_add_const`
+- `YMFlow.WeightedGraph.heatStep_add`
 - `YMFlow.WeightedGraph.heatStep_smul`
 - `YMFlow.WeightedGraph.heatStep_sub_const`
 - `YMFlow.WeightedGraph.sum_heatStep`
@@ -63,6 +64,7 @@ Main API:
 - `YMFlow.WeightedGraph.iterate_heatStep_mem_Icc`
 - `YMFlow.WeightedGraph.iterate_heatStep_const`
 - `YMFlow.WeightedGraph.iterate_heatStep_add_const`
+- `YMFlow.WeightedGraph.iterate_heatStep_add`
 - `YMFlow.WeightedGraph.iterate_heatStep_smul`
 - `YMFlow.WeightedGraph.iterate_heatStep_sub_const`
 - `YMFlow.WeightedGraph.iterate_heatStep_zero_steps`
@@ -96,6 +98,9 @@ Consumer meaning:
 - `heatStep_add_const` and `iterate_heatStep_add_const` say adding a spatial
   constant commutes with the scheme and all iterates; this is a small oracle
   for later oscillation estimates.
+- `heatStep_add` and `iterate_heatStep_add` say pointwise sums commute with
+  the scheme and all iterates; this is a small decomposition oracle for later
+  linearized estimates.
 - `heatStep_smul` and `iterate_heatStep_smul` say scalar multiplication
   commutes with the scheme and all iterates; this is a small normalization
   oracle for later discrete estimates.
