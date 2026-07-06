@@ -175,6 +175,24 @@ theorem heatStep_smul (tau a : ℝ) (u : V -> ℝ) :
     exact Finset.sum_congr rfl fun x _ => by ring]
   ring
 
+/-- Subtraction commutes with one heat step. -/
+theorem heatStep_sub (tau : ℝ) (u w : V -> ℝ) :
+    G.heatStep tau (fun v => u v - w v)
+      = fun v => G.heatStep tau u v - G.heatStep tau w v := by
+  calc
+    G.heatStep tau (fun v => u v - w v)
+        = G.heatStep tau (fun v => u v + (-1 : ℝ) * w v) := by
+          congr
+          ext v
+          ring
+    _ = fun v => G.heatStep tau u v + G.heatStep tau (fun v => (-1 : ℝ) * w v) v := by
+          rw [G.heatStep_add]
+    _ = fun v => G.heatStep tau u v + (-1 : ℝ) * G.heatStep tau w v := by
+          rw [G.heatStep_smul]
+    _ = fun v => G.heatStep tau u v - G.heatStep tau w v := by
+          ext v
+          ring
+
 /-- Subtracting a spatial constant commutes with one heat step. -/
 theorem heatStep_sub_const (tau c : ℝ) (u : V -> ℝ) :
     G.heatStep tau (fun v => u v - c) = fun v => G.heatStep tau u v - c := by
@@ -295,6 +313,25 @@ theorem iterate_heatStep_smul (tau a : ℝ) (u : V -> ℝ) (n : ℕ) :
   | succ n ih =>
     rw [Function.iterate_succ_apply', Function.iterate_succ_apply', ih,
       G.heatStep_smul]
+
+/-- Subtraction commutes with every iterated heat step. -/
+theorem iterate_heatStep_sub (tau : ℝ) (u w : V -> ℝ) (n : ℕ) :
+    (G.heatStep tau)^[n] (fun v => u v - w v)
+      = fun v => (G.heatStep tau)^[n] u v - (G.heatStep tau)^[n] w v := by
+  calc
+    (G.heatStep tau)^[n] (fun v => u v - w v)
+        = (G.heatStep tau)^[n] (fun v => u v + (-1 : ℝ) * w v) := by
+          congr
+          ext v
+          ring
+    _ = fun v => (G.heatStep tau)^[n] u v
+        + (G.heatStep tau)^[n] (fun v => (-1 : ℝ) * w v) v := by
+          rw [G.iterate_heatStep_add]
+    _ = fun v => (G.heatStep tau)^[n] u v + (-1 : ℝ) * (G.heatStep tau)^[n] w v := by
+          rw [G.iterate_heatStep_smul]
+    _ = fun v => (G.heatStep tau)^[n] u v - (G.heatStep tau)^[n] w v := by
+          ext v
+          ring
 
 /-- Subtracting a spatial constant commutes with every iterated heat step. -/
 theorem iterate_heatStep_sub_const (tau c : ℝ) (u : V -> ℝ) (n : ℕ) :
