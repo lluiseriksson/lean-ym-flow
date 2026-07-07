@@ -55,6 +55,7 @@ Main API:
 - `YMFlow.WeightedGraph.heatStep_add_const`
 - `YMFlow.WeightedGraph.heatStep_add`
 - `YMFlow.WeightedGraph.heatStep_smul`
+- `YMFlow.WeightedGraph.heatStep_neg`
 - `YMFlow.WeightedGraph.heatStep_sub`
 - `YMFlow.WeightedGraph.heatStep_sub_const`
 - `YMFlow.WeightedGraph.sum_heatStep`
@@ -68,6 +69,7 @@ Main API:
 - `YMFlow.WeightedGraph.iterate_heatStep_add_const`
 - `YMFlow.WeightedGraph.iterate_heatStep_add`
 - `YMFlow.WeightedGraph.iterate_heatStep_smul`
+- `YMFlow.WeightedGraph.iterate_heatStep_neg`
 - `YMFlow.WeightedGraph.iterate_heatStep_sub`
 - `YMFlow.WeightedGraph.iterate_heatStep_sub_const`
 - `YMFlow.WeightedGraph.iterate_heatStep_zero_steps`
@@ -107,6 +109,9 @@ Consumer meaning:
   linearized estimates.
 - `heatStep_smul` and `iterate_heatStep_smul` say scalar multiplication
   commutes with the scheme and all iterates; this is a small normalization
+  oracle for later discrete estimates.
+- `heatStep_neg` and `iterate_heatStep_neg` say sign reversal commutes with
+  the scheme and all iterates; this is a small antisymmetric-perturbation
   oracle for later discrete estimates.
 - `heatStep_sub` and `iterate_heatStep_sub` say pointwise differences commute
   with the scheme and all iterates; this is a small perturbation oracle for

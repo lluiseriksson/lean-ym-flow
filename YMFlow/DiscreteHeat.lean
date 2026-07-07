@@ -175,6 +175,11 @@ theorem heatStep_smul (tau a : ℝ) (u : V -> ℝ) :
     exact Finset.sum_congr rfl fun x _ => by ring]
   ring
 
+/-- Negation commutes with one heat step. -/
+theorem heatStep_neg (tau : ℝ) (u : V -> ℝ) :
+    G.heatStep tau (fun v => -u v) = fun v => -G.heatStep tau u v := by
+  simpa using G.heatStep_smul tau (-1) u
+
 /-- Subtraction commutes with one heat step. -/
 theorem heatStep_sub (tau : ℝ) (u w : V -> ℝ) :
     G.heatStep tau (fun v => u v - w v)
@@ -319,6 +324,12 @@ theorem iterate_heatStep_smul (tau a : ℝ) (u : V -> ℝ) (n : ℕ) :
   | succ n ih =>
     rw [Function.iterate_succ_apply', Function.iterate_succ_apply', ih,
       G.heatStep_smul]
+
+/-- Negation commutes with every iterated heat step. -/
+theorem iterate_heatStep_neg (tau : ℝ) (u : V -> ℝ) (n : ℕ) :
+    (G.heatStep tau)^[n] (fun v => -u v)
+      = fun v => - (G.heatStep tau)^[n] u v := by
+  simpa using G.iterate_heatStep_smul tau (-1) u n
 
 /-- Subtraction commutes with every iterated heat step. -/
 theorem iterate_heatStep_sub (tau : ℝ) (u w : V -> ℝ) (n : ℕ) :
