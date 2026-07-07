@@ -1,6 +1,6 @@
 # Hypothesis Frontier
 
-Date: 2026-07-07 (zero-row heat oracle)
+Date: 2026-07-07 (row-formula heat oracle)
 
 ## Current proof status
 
@@ -21,6 +21,8 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
 - `heatStep_zero_tau`: the zero-time heat step is exactly the identity map.
 - `heatStep_of_zero_row`: at a vertex whose outgoing weights are all zero,
   one heat step leaves that vertex value unchanged.
+- `heatStep_row_formula`: one heat step rewrites as the explicit neighbour
+  formula with self coefficient `1 - tau * degree v`.
 - `heatStep_mem_Icc`: one-step closed interval invariance under CFL.
 - `heatStep_const`: spatially constant states are fixed by one heat step.
 - `heatStep_add_const`: adding a spatial constant commutes with one heat step.
