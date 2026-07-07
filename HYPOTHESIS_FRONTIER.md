@@ -1,6 +1,6 @@
 # Hypothesis Frontier
 
-Date: 2026-07-07 (heat negation oracle)
+Date: 2026-07-07 (zero-row heat oracle)
 
 ## Current proof status
 
@@ -19,6 +19,8 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
 - `heatStep_nonneg`: nonnegative data remains nonnegative after one heat step
   under CFL.
 - `heatStep_zero_tau`: the zero-time heat step is exactly the identity map.
+- `heatStep_of_zero_row`: at a vertex whose outgoing weights are all zero,
+  one heat step leaves that vertex value unchanged.
 - `heatStep_mem_Icc`: one-step closed interval invariance under CFL.
 - `heatStep_const`: spatially constant states are fixed by one heat step.
 - `heatStep_add_const`: adding a spatial constant commutes with one heat step.
@@ -40,12 +42,13 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
   `iterate_heatStep_sub`,
   `iterate_heatStep_sub_const`,
   `iterate_heatStep_zero_steps`,
-  `iterate_heatStep_zero_tau`, `sum_iterate_heatStep`: maximum, minimum,
+  `iterate_heatStep_zero_tau`,
+  `iterate_heatStep_of_zero_row`, `sum_iterate_heatStep`: maximum, minimum,
   nonnegativity, sup-norm stability, interval invariance, constant states,
   additive-constant covariance, additivity, scalar covariance, pointwise
   negation covariance, pointwise subtraction covariance, subtractive-centering
-  covariance, zero-step identity, zero-time identity, and mass conservation
-  persist under iteration of the scheme.
+  covariance, zero-step identity, zero-time identity, isolated zero-row
+  invariance, and mass conservation persist under iteration of the scheme.
 
 `CFL_of_nonneg_le` is the current substepping oracle: if `tau` satisfies CFL,
 then every `sigma` with `0 ≤ sigma ≤ tau` also satisfies CFL.
