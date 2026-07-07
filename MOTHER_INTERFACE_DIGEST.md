@@ -58,6 +58,7 @@ Main API:
 - `YMFlow.WeightedGraph.heatStep_sub`
 - `YMFlow.WeightedGraph.heatStep_sub_const`
 - `YMFlow.WeightedGraph.sum_heatStep`
+- `YMFlow.WeightedGraph.sum_heatStep_eq_zero`
 - `YMFlow.WeightedGraph.iterate_heatStep_le_of_le`
 - `YMFlow.WeightedGraph.le_iterate_heatStep_of_le`
 - `YMFlow.WeightedGraph.iterate_heatStep_nonneg`
@@ -72,6 +73,7 @@ Main API:
 - `YMFlow.WeightedGraph.iterate_heatStep_zero_steps`
 - `YMFlow.WeightedGraph.iterate_heatStep_zero_tau`
 - `YMFlow.WeightedGraph.sum_iterate_heatStep`
+- `YMFlow.WeightedGraph.sum_iterate_heatStep_eq_zero`
 
 Input assumptions:
 
@@ -122,6 +124,9 @@ Consumer meaning:
   heat steps.
 - `sum_heatStep` and `sum_iterate_heatStep` are exact mass-conservation
   identities for symmetric weights.
+- `sum_heatStep_eq_zero` and `sum_iterate_heatStep_eq_zero` package the
+  centered-observable oracle: a zero-total-mass datum remains zero-total-mass
+  after one step and after any number of steps.
 
 ## M0 Linear Model
 
