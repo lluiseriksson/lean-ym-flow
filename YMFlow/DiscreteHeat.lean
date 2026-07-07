@@ -76,6 +76,14 @@ theorem heatStep_split (tau : ℝ) (u : V -> ℝ) (v : V) :
   rw [degree, Finset.sum_mul, ← Finset.sum_sub_distrib]
   exact Finset.sum_congr rfl fun x _ => by ring
 
+/-- Row formula for one heat step: the current vertex carries coefficient
+`1 - tau * degree v`, and neighbours carry weights `tau * w(v,x)`. -/
+theorem heatStep_row_formula (tau : ℝ) (u : V -> ℝ) (v : V) :
+    G.heatStep tau u v
+      = (1 - tau * G.degree v) * u v + tau * ∑ x, G.weight v x * u x := by
+  rw [G.heatStep_split]
+  ring
+
 /-- With zero time step, the heat scheme is the identity map. -/
 theorem heatStep_zero_tau (u : V -> ℝ) :
     G.heatStep 0 u = u := by
