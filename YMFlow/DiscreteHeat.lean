@@ -220,6 +220,12 @@ theorem sum_heatStep (tau : ℝ) (u : V -> ℝ) :
     rw [← Finset.mul_sum, hsplit, hswap, sub_self, mul_zero]
   rw [hzero, add_zero]
 
+/-- Mean-zero data remains mean-zero after one heat step. -/
+theorem sum_heatStep_eq_zero {tau : ℝ} {u : V -> ℝ}
+    (hu : (∑ v, u v) = 0) :
+    (∑ v, G.heatStep tau u v) = 0 := by
+  rw [G.sum_heatStep, hu]
+
 /-- The maximum principle persists under iteration of the scheme. -/
 theorem iterate_heatStep_le_of_le {tau M : ℝ} (hcfl : G.CFL tau)
     {u : V -> ℝ} (hu : ∀ v, u v ≤ M) (n : ℕ) :
@@ -359,6 +365,12 @@ theorem sum_iterate_heatStep (tau : ℝ) (u : V -> ℝ) (n : ℕ) :
   | zero => simp
   | succ n ih =>
     rw [Function.iterate_succ_apply', G.sum_heatStep, ih]
+
+/-- Mean-zero data remains mean-zero under every iterated heat step. -/
+theorem sum_iterate_heatStep_eq_zero {tau : ℝ} {u : V -> ℝ}
+    (hu : (∑ v, u v) = 0) (n : ℕ) :
+    (∑ v, (G.heatStep tau)^[n] u v) = 0 := by
+  rw [G.sum_iterate_heatStep, hu]
 
 end WeightedGraph
 
