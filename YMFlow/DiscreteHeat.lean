@@ -82,6 +82,13 @@ theorem heatStep_zero_tau (u : V -> ℝ) :
   funext v
   simp [heatStep]
 
+/-- If a vertex has zero outgoing weights, one heat step leaves its value
+unchanged. -/
+theorem heatStep_of_zero_row {tau : ℝ} {u : V -> ℝ} {v : V}
+    (hrow : ∀ x, G.weight v x = 0) :
+    G.heatStep tau u v = u v := by
+  simp [heatStep, hrow]
+
 /-- **Discrete maximum principle.**  Under CFL, one heat step cannot exceed
 any pointwise upper bound of the initial datum. -/
 theorem heatStep_le_of_le {tau M : ℝ} (hcfl : G.CFL tau) {u : V -> ℝ}
@@ -368,6 +375,18 @@ theorem iterate_heatStep_zero_tau (u : V -> ℝ) (n : ℕ) :
   | zero => rfl
   | succ n ih =>
     rw [Function.iterate_succ_apply', ih, G.heatStep_zero_tau]
+
+/-- If a vertex has zero outgoing weights, every iterated heat step leaves
+its value unchanged. -/
+theorem iterate_heatStep_of_zero_row {tau : ℝ} {u : V -> ℝ} {v : V}
+    (hrow : ∀ x, G.weight v x = 0) (n : ℕ) :
+    (G.heatStep tau)^[n] u v = u v := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+    rw [Function.iterate_succ_apply']
+    exact (G.heatStep_of_zero_row
+      (tau := tau) (u := (G.heatStep tau)^[n] u) (v := v) hrow).trans ih
 
 /-- Mass conservation persists under iteration of the scheme. -/
 theorem sum_iterate_heatStep (tau : ℝ) (u : V -> ℝ) (n : ℕ) :

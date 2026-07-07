@@ -46,6 +46,7 @@ Main API:
 - `YMFlow.WeightedGraph.CFL_of_nonneg_le`
 - `YMFlow.WeightedGraph.heatStep_split`
 - `YMFlow.WeightedGraph.heatStep_zero_tau`
+- `YMFlow.WeightedGraph.heatStep_of_zero_row`
 - `YMFlow.WeightedGraph.heatStep_le_of_le`
 - `YMFlow.WeightedGraph.le_heatStep_of_le`
 - `YMFlow.WeightedGraph.heatStep_nonneg`
@@ -74,6 +75,7 @@ Main API:
 - `YMFlow.WeightedGraph.iterate_heatStep_sub_const`
 - `YMFlow.WeightedGraph.iterate_heatStep_zero_steps`
 - `YMFlow.WeightedGraph.iterate_heatStep_zero_tau`
+- `YMFlow.WeightedGraph.iterate_heatStep_of_zero_row`
 - `YMFlow.WeightedGraph.sum_iterate_heatStep`
 - `YMFlow.WeightedGraph.sum_iterate_heatStep_eq_zero`
 
@@ -99,6 +101,9 @@ Consumer meaning:
 - `CFL_zero`, `heatStep_zero_tau`, and `iterate_heatStep_zero_tau` give the
   zero-time oracle: tau `0` satisfies CFL and every zero-time heat iterate is
   the identity map.
+- `heatStep_of_zero_row` and `iterate_heatStep_of_zero_row` say a vertex with
+  zero outgoing weights keeps its value under one step and under all iterates;
+  this is a small isolated-vertex oracle for graph sanity checks.
 - `heatStep_const` and `iterate_heatStep_const` say spatially constant states
   are fixed by the scheme and all its iterates.
 - `heatStep_add_const` and `iterate_heatStep_add_const` say adding a spatial
