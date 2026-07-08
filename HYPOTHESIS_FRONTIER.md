@@ -1,6 +1,6 @@
 # Hypothesis Frontier
 
-Date: 2026-07-07 (row-formula heat oracle)
+Date: 2026-07-08 (perturbation-mass heat oracle)
 
 ## Current proof status
 
@@ -34,6 +34,8 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
   step.
 - `sum_heatStep`: **exact mass conservation** for symmetric weights (vertex-
   swap antisymmetry).
+- `sum_heatStep_sub`: the total mass of a pointwise perturbation is preserved
+  after one heat step.
 - `iterate_heatStep_le_of_le`, `le_iterate_heatStep_of_le`,
   `iterate_heatStep_nonneg`, `abs_iterate_heatStep_le`,
   `iterate_heatStep_mem_Icc`, `iterate_heatStep_const`,
@@ -45,12 +47,14 @@ Discrete parabolic toolbox (`DiscreteHeat.lean`) — no interface deps:
   `iterate_heatStep_sub_const`,
   `iterate_heatStep_zero_steps`,
   `iterate_heatStep_zero_tau`,
-  `iterate_heatStep_of_zero_row`, `sum_iterate_heatStep`: maximum, minimum,
+  `iterate_heatStep_of_zero_row`, `sum_iterate_heatStep`,
+  `sum_iterate_heatStep_sub`: maximum, minimum,
   nonnegativity, sup-norm stability, interval invariance, constant states,
   additive-constant covariance, additivity, scalar covariance, pointwise
   negation covariance, pointwise subtraction covariance, subtractive-centering
   covariance, zero-step identity, zero-time identity, isolated zero-row
-  invariance, and mass conservation persist under iteration of the scheme.
+  invariance, mass conservation, and perturbation-mass conservation persist
+  under iteration of the scheme.
 
 `CFL_of_nonneg_le` is the current substepping oracle: if `tau` satisfies CFL,
 then every `sigma` with `0 ≤ sigma ≤ tau` also satisfies CFL.

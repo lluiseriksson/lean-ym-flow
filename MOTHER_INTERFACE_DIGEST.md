@@ -1,6 +1,6 @@
 # Mother Interface Digest
 
-Date: 2026-07-07
+Date: 2026-07-08
 
 This digest lists the current `main` artifacts that the mother repository may
 consume or monitor.  It is an integration map, not a new mathematical claim.
@@ -62,6 +62,7 @@ Main API:
 - `YMFlow.WeightedGraph.heatStep_sub_const`
 - `YMFlow.WeightedGraph.sum_heatStep`
 - `YMFlow.WeightedGraph.sum_heatStep_eq_zero`
+- `YMFlow.WeightedGraph.sum_heatStep_sub`
 - `YMFlow.WeightedGraph.iterate_heatStep_le_of_le`
 - `YMFlow.WeightedGraph.le_iterate_heatStep_of_le`
 - `YMFlow.WeightedGraph.iterate_heatStep_nonneg`
@@ -79,6 +80,7 @@ Main API:
 - `YMFlow.WeightedGraph.iterate_heatStep_of_zero_row`
 - `YMFlow.WeightedGraph.sum_iterate_heatStep`
 - `YMFlow.WeightedGraph.sum_iterate_heatStep_eq_zero`
+- `YMFlow.WeightedGraph.sum_iterate_heatStep_sub`
 
 Input assumptions:
 
@@ -140,6 +142,9 @@ Consumer meaning:
 - `sum_heatStep_eq_zero` and `sum_iterate_heatStep_eq_zero` package the
   centered-observable oracle: a zero-total-mass datum remains zero-total-mass
   after one step and after any number of steps.
+- `sum_heatStep_sub` and `sum_iterate_heatStep_sub` say the total mass of a
+  pointwise perturbation is preserved after one step and after any number of
+  steps.
 
 ## M0 Linear Model
 
