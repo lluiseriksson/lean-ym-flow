@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "reviewed_on": "2026-09-09",
+  "window": {
+    "start": "2026-09-03",
+    "end": "2026-09-09",
+    "calendar_week_start": "2026-09-07"
+  },
+  "coverage": "targeted, non-exhaustive",
+  "repository_card": {
+    "repository": "lluiseriksson/lean-ym-flow",
+    "source_ids": [
+      "2606.21062",
+      "2606.21073",
+      "2609.08132"
+    ],
+    "local_anchors": [
+      "README.md",
+      "PARABOLIC_TOOLBOX.md",
+      "HYPOTHESIS_FRONTIER.md"
+    ],
+    "frontier": "The finite/lattice flow and parabolic toolbox are interfaces with named analytic obligations.",
+    "bridge_hypothesis": "The newly revised prescribed-flow paper suggests extracting the comparison argument into the parabolic toolbox. Dictionary: metric/tensor order -> candidate scalar barrier inequality. The manifold, bundle metric and prescribed tensor do not map directly to compact lattice gauge variables.",
+    "next_finite_task": "Transcribe the exact scalar differential inequality behind the C0 comparison, list its sign and compactness assumptions, and prove a bounded finite-dimensional comparison lemma before any lattice application.",
+    "falsifier": "Stop the transfer if the required order is unavailable, the forcing tensor is not positive in the needed sense, or the bound depends on continuum geometry absent from the lattice model.",
+    "related_repositories": [
+      "lean-gaussian-field",
+      "THE-ERIKSSON-PROGRAMME"
+    ],
+    "proposal_status": "speculative; not executed or formally verified",
+    "eliminated_hypotheses": [],
+    "inspected_commit": "03991e3dadc700cbce71f20dc26c09f842c00609"
+  },
+  "sources": [
+    {
+      "id": "arxiv:2606.21062",
+      "arxiv_id": "2606.21062",
+      "title": "The prescribed Hermitian-Yang-Mills flow I",
+      "authors": [
+        "Xiong, Zhiyao",
+        "Yang, Xaokui",
+        "Yau, Shing-Tung"
+      ],
+      "first_submitted": "2026-06-19",
+      "latest_revision": "2026-09-05",
+      "reviewed_version": "v2",
+      "url": "https://arxiv.org/abs/2606.21062v2",
+      "doi": "10.48550/arXiv.2606.21062",
+      "verified_on": "2026-09-09",
+      "recency": "revised-in-trailing-week",
+      "publication_status": "preprint; peer-review status not established in this sweep",
+      "evidence_level": "literature",
+      "review_depth": "Abstract and submission history",
+      "source_claim": "The prescribed Hermitian-Yang-Mills flow paper establishes convergence for a class of prescribed Hermitian tensors; a parabolic comparison principle supplies the uniform C0 estimate.",
+      "limits": "This is a flow of Hermitian metrics on holomorphic bundles, not Wilson lattice gradient flow. Read the precise tensor and manifold assumptions before importing a comparison principle. Version 2 is dated 5 September; version 1 is from June.",
+      "tags": [
+        "yang-mills-flow",
+        "parabolic",
+        "comparison-principle"
+      ],
+      "abstract_page_sha256": "486c85fb8b7b5ed192a38759dc73e4aa57487be039590c1d8c0afc8dff40cbc0",
+      "reviewed_full_text_sha256": "7e7ad5d1fef2e606ec906f2d40edb7f9580211571e59a51302f06a567276736c",
+      "reuse": "Bibliographic metadata and original synthesis only; no permission to train on linked full text is inferred."
+    },
+    {
+      "id": "arxiv:2606.21073",
+      "arxiv_id": "2606.21073",
+      "title": "The prescribed Hermitian-Yang-Mills flow II",
+      "authors": [
+        "Xiong, Zhiyao",
+        "Yang, Xiaokui",
+        "Yau, Shing-Tung"
+      ],
+      "first_submitted": "2026-06-19",
+      "latest_revision": "2026-06-19",
+      "reviewed_version": "v1",
+      "url": "https://arxiv.org/abs/2606.21073v1",
+      "doi": "10.48550/arXiv.2606.21073",
+      "verified_on": "2026-09-09",
+      "recency": "background",
+      "publication_status": "preprint; peer-review status not established in this sweep",
+      "evidence_level": "literature",
+      "review_depth": "Abstract and submission history",
+      "source_claim": "The second prescribed Hermitian-Yang-Mills flow paper gives a Donaldson-Uhlenbeck-Yau analogue with an explicit subsheaf degree condition and convergence to a prescribed curvature tensor.",
+      "limits": "Its subsheaf and positivity hypotheses cannot be dropped or replaced by ordinary Wilson-action monotonicity. First posted in June; included only as a companion to the newly revised first paper.",
+      "tags": [
+        "yang-mills-flow",
+        "geometry",
+        "convergence"
+      ],
+      "abstract_page_sha256": "b717a7645c044c1b1ed021145b2a3a8b91f9326816de2cb7e8a0002bf1b3a41b",
+      "reviewed_full_text_sha256": null,
+      "reuse": "Bibliographic metadata and original synthesis only; no permission to train on linked full text is inferred."
+    },
+    {
+      "id": "arxiv:2609.08132",
+      "arxiv_id": "2609.08132",
+      "title": "Thick points of log-correlated Gaussian fields do not depend on the mollifier",
+      "authors": [
+        "Ambrose, Kyle"
+      ],
+      "first_submitted": "2026-09-08",
+      "latest_revision": "2026-09-08",
+      "reviewed_version": "v1",
+      "url": "https://arxiv.org/abs/2609.08132v1",
+      "doi": "10.48550/arXiv.2609.08132",
+      "verified_on": "2026-09-09",
+      "recency": "new-this-calendar-week",
+      "publication_status": "preprint; peer-review status not established in this sweep",
+      "evidence_level": "literature",
+      "review_depth": "Abstract and submission history",
+      "source_claim": "Ambrose reports almost-sure independence of thick-point sets from admissible mollifiers for log-correlated Gaussian fields, including a two-dimensional domain GFF extension.",
+      "limits": "Admissibility conditions and the distribution-valued field matter. This is not a dimension-uniform finite massive covariance-decay theorem or a Wilson-flow smoothing bound.",
+      "tags": [
+        "gaussian",
+        "regularization",
+        "universality"
+      ],
+      "abstract_page_sha256": "4127d34a15d06ccbce0738f60a733f752cbd28932da58c0a1985668f07ce8dd1",
+      "reviewed_full_text_sha256": null,
+      "reuse": "Bibliographic metadata and original synthesis only; no permission to train on linked full text is inferred."
+    }
+  ]
+}
